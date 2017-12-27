@@ -15,7 +15,7 @@ begin
 
 storms = 1672 - 2        ; Subtracted 2 because dummy file has two fake lines at the end of it
 
-track_url = "/lb13/abentley/scripts/github/other/"
+track_url = "/path/to/dummy/track/file/"
 fileread = asciiread(track_url+"dummy_EC_track_data.csv",(/storms,9/),"float")
 out_filename = "track_density_350km"
 
@@ -184,8 +184,8 @@ printMinMax(count_total,True)
 ;;Output count to netCDF file
 ;;##################################################   
 
-out_dir = track_url
-out_fil = out_dir+out_filename+".nc"  ; Output filename
+out_dir = "/path/to/track/density/file/"		; Output file path
+out_fil = out_dir+out_filename+".nc"  			; Output filename
 var = "count"
 
 lat = domain_lat
