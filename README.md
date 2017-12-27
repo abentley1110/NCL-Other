@@ -1,5 +1,5 @@
 # NCL-Other
-Purpose: Plot 
+Purpose: Plotting track maps, track density maps, GFS forecasts, etc. using NCL 
 
 *PRIOR TO USING THIS CODE:*  
 1) Download my NCL functions from: https://github.com/abentley1110/NCL-Functions/
