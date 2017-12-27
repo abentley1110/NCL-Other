@@ -59,11 +59,11 @@ else if shh .ge. 7 .and. shh .lt. 16 then
      sdate = cd_inv_calendar(syyyy,smm,sdd,06,00,00,timeUnits,0)
      edate = cd_inv_calendar(eyyyy,emm,edd,18,00,00,timeUnits,0)
      hr = 06
-else if shh .ge. 16 .and. shh .lt. 22 then
+else if shh .ge. 16 .and. shh .lt. 20 then
      sdate = cd_inv_calendar(syyyy,smm,sdd,12,00,00,timeUnits,0)
      edate = cd_inv_calendar(eyyyy,emm,edd,18,00,00,timeUnits,0)
      hr = 12
-else if shh .ge. 22 then
+else if shh .ge. 20 then
      sdate = cd_inv_calendar(syyyy,smm,sdd,18,00,00,timeUnits,0)
      edate = cd_inv_calendar(eyyyy,emm,edd,18,00,00,timeUnits,0)
      hr = 18
@@ -82,7 +82,7 @@ print("edate: "+ut_string(edate,""))
 ;;; forecast initialization time by filling in with the forecast analysis grib files 
 
 fcast = "yes" 	; Do you want to plot the 192 hour GFS forecast?
-untar = "no"	; Do you want to untar the archived GFS grib files?	        	
+untar = "yes"	; Do you want to untar the archived GFS grib files?	        	
   
 fdate = edate  
 fdate = fdate + hr + 6  ; Date/time of first forecast time to plot
@@ -94,8 +94,8 @@ imgcount = 1   	; Number of the first image to plot
   				   
 name = "mslp_jet"
 
-dir_grib = "/lb13/abentley/scripts/github/gfs/grib/"	
-dir_plot = "/lb13/abentley/scripts/github/gfs/"	        
+dir_grib = "/path/to/untarred/gfs/grib/files/"	
+dir_plot = "/path/to/where/gfs/images/initially/created/"	        
 
 ;-----------------------------------------------------
 ; Create archived GFS plots from sdate to fdate
@@ -212,7 +212,7 @@ enddomain = dimsizes(folder)
 do x = 0,enddomain-1
 
 	domain = folder(x)
-	dir_out = "/lb11/abentley/www/research_images/superstorm93/"+domain+"/forecast/"+name+"/"
+	dir_out = "/lb11/abentley/www/research_images/superstorm93/"+domain+"/forecast/"+name+"/"  ; path to final images
 ;	system("mkdir "+dir_out)
 
 ;==============================================
@@ -575,7 +575,7 @@ enddomain = dimsizes(folder)
 do x = 0,enddomain-1
 
 	domain = folder(x)
-	dir_out = "/lb11/abentley/www/research_images/superstorm93/"+domain+"/forecast/"+name+"/"
+	dir_out = "/lb11/abentley/www/research_images/superstorm93/"+domain+"/forecast/"+name+"/" ; path to final images
 ;	system("mkdir "+dir_out)
 
 ;==============================================
