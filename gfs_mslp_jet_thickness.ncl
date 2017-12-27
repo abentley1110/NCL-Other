@@ -59,11 +59,11 @@ else if shh .ge. 7 .and. shh .lt. 16 then
      sdate = cd_inv_calendar(syyyy,smm,sdd,06,00,00,timeUnits,0)
      edate = cd_inv_calendar(eyyyy,emm,edd,18,00,00,timeUnits,0)
      hr = 06
-else if shh .ge. 16 .and. shh .lt. 20 then
+else if shh .ge. 16 .and. shh .lt. 22 then
      sdate = cd_inv_calendar(syyyy,smm,sdd,12,00,00,timeUnits,0)
      edate = cd_inv_calendar(eyyyy,emm,edd,18,00,00,timeUnits,0)
      hr = 12
-else if shh .ge. 20 then
+else if shh .ge. 22 then
      sdate = cd_inv_calendar(syyyy,smm,sdd,18,00,00,timeUnits,0)
      edate = cd_inv_calendar(eyyyy,emm,edd,18,00,00,timeUnits,0)
      hr = 18
@@ -112,7 +112,7 @@ do tim = sdate,fdate,6
         str_time = ut_string(tim,"%y%N%D")
         str_hr = ut_string(tim,"%H")
         print(" ")
-;        print("tim: "+ut_string(tim,""))
+        print("tim: "+ut_string(tim,""))
         print("str_time: "+str_time+" str_hr: "+str_hr)
   
         ; Gets the tar file and opens the grib files
@@ -494,31 +494,37 @@ end do
 	
 end if ; tim .ne. fdate
 
-end do
+
+
+
+
+
 
 
 ;**********************************************************************************************************
 ; Obtaining analysis and forecast hours from specified forecast run of GFS
 ;**********************************************************************************************************    
-    
+
+if (tim .eq. fdate) then    
 
 print("Plotting from forecast grib files")
 fhr  := (/0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192/)
 nfhr := dimsizes(fhr)
 
-    do f = 0,nfhr-1
-            if (fhr(f).lt.10) then
-                filefhr = "00"+fhr(f)
-            else if ((fhr(f).lt.100).and.(fhr(f).gt.10)) then
-                filefhr = "0"+fhr(f)
-        	else if (fhr(f).gt.100) then
-                filefhr = fhr(f)
-            end if 
-            end if
-            end if
+do f = 0,nfhr-1
+    if (fhr(f).lt.10) then
+        filefhr = "00"+fhr(f)
+    else if ((fhr(f).lt.100).and.(fhr(f).gt.10)) then
+        filefhr = "0"+fhr(f)
+    else if (fhr(f).gt.100) then
+        filefhr = fhr(f)
+    end if 
+    end if
+    end if
                  
-            filename = "/nfs/cas2/unidata/GRIB/gfs0p5deg/GFS_"+str_time+"_"+str_hr+"_"+filefhr+".grb2"
-            fhr_cur = fhr(f)
+    filename = "/nfs/cas2/unidata/GRIB/gfs0p5deg/GFS_"+str_time+"_"+str_hr+"_"+filefhr+".grb2"
+    fhr_cur = fhr(f)
+    print("fhr_cur: "+fhr_cur)
   
 ;**********************************************************************************************************
 ; Download data from GFS files
@@ -849,6 +855,10 @@ print("Image = "+imgcount+" created in: "+dir_out)
 	
 end do
 print(" ")
+end do
+
+end if ; tim .eq. fdate
+
 end do
 	
 system("rm -f "+dir_grib+"*.grb2.tar")
