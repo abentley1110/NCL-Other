@@ -20,9 +20,9 @@ print(" START SCRIPT ")
 print("**************")
 print(" ")
 
-  name = "hovmoller_diagram"
+  name = "hovmoller_diagram"    ; name of final image
 	
-  dir_out = "/lb11/abentley/www/research_images/superstorm93/"
+  dir_out = "/path/to/final/hovmoller/image/"     ; path to final image
 
   system ("'rm' "+dir_out+name+".png")
 
